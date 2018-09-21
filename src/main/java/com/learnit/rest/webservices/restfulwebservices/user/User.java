@@ -2,10 +2,18 @@ package com.learnit.rest.webservices.restfulwebservices.user;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 	
 	private Integer id; 
+	
+	//viesti jos ehto ei toteudu nimeä annettaessa
+	@Size(min=2, message="name should have atleast 2 characters")
 	private String name;
+
+	@Past
 	private Date birthDate;
 	
 	protected User() {
