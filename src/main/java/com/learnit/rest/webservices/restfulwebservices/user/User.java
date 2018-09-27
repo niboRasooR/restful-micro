@@ -5,6 +5,11 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+//import ctrl shift O
+@ApiModel(description="Kaikki käyttäjän tiedot")
 public class User {
 	
 	private Integer id; 
@@ -13,7 +18,10 @@ public class User {
 	@Size(min=2, message="name should have atleast 2 characters")
 	private String name;
 
+	// importti : ctrl shift O
+	// Tässä tämmönen property määritys
 	@Past
+	@ApiModelProperty(notes="Syntymäaika oltava menneisyydessä")
 	private Date birthDate;
 	
 	protected User() {
