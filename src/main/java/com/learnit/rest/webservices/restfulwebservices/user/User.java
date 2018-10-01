@@ -1,7 +1,12 @@
 package com.learnit.rest.webservices.restfulwebservices.user;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -10,8 +15,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 //import ctrl shift O
 @ApiModel(description="Kaikki käyttäjän tiedot")
+@Entity 
 public class User {
 	
+	@Id
+	@GeneratedValue
 	private Integer id; 
 	
 	//viesti jos ehto ei toteudu nimeä annettaessa
@@ -24,9 +32,27 @@ public class User {
 	@ApiModelProperty(notes="Syntymäaika oltava menneisyydessä")
 	private Date birthDate;
 	
+	//TÄRKEÄ:  tämä mappedBy pitää olla se
+	// mikä POST-luokassa on fieldin nimi
+	// joka siis on 'kirjoittaja'
+	//ensimmäinen sana One viittaa aina tähän luokkaan ja
+	// toinen Many viittaa siihen mitä esitellään eli List
+	@OneToMany(mappedBy="kirjoittaja")
+	private List<Post> posts;
+	
 	protected User() {
 		super();
 		
+	}
+
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 
